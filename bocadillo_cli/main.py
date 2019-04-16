@@ -16,7 +16,7 @@ else:
     BOCADILLO_VERSION = fmt.version(bocadillo.__version__)
 
 LIB_REPO = "https://github.com/bocadilloproject/bocadillo"
-DOCS = "https://bocadilloproject.github.io"
+DOCS = "https://bocadilloproject.github.io/"
 
 
 def _get_template(name: str) -> Template:
@@ -91,9 +91,7 @@ class Project:
         click.echo()
         cd = fmt.code(f"cd {self.location}")
         readme = fmt.code("README.md")
-        click.echo(
-            f"You can now run {cd} and read {readme} to get started."
-        )
+        click.echo(f"You can now run {cd} and read {readme} to get started.")
 
         click.echo()
         click.echo("To get help about Bocadillo, visit the docs:")
