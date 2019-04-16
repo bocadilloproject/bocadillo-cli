@@ -4,6 +4,8 @@ All notable changes to this project are documented here. The format of this docu
 
 ## [Unreleased]
 
+## [v0.1.0] - 2019-14-17
+
 ### Added
 
 Features:
@@ -17,4 +19,5 @@ Meta:
 - Changelog.
 - License.
 
-[unreleased]: https://github.com/bocadilloproject/bocadillo-cli/compare/04dff6e...HEAD
+[v0.1.0]: https://github.com/bocadilloproject/bocadillo-cli/compare/v0.1.0...HEAD
+[unreleased]: https://github.com/bocadilloproject/bocadillo-cli/compare/04dff6e...v0.1.0
