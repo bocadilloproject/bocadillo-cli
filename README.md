@@ -14,6 +14,10 @@ pip install bocadillo-cli
 
 > TODO
 
+## Contributing
+
+Want to contribute code or documentation? Great to hear! Our [Contributing Guidelines](https://github.com/bocadilloproject/bocadillo-cli/blob/master/CONTRIBUTING.md) are here to help.
+
 ## License
 
 MIT
