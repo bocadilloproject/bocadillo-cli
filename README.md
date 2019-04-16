@@ -8,7 +8,7 @@
 
 [pypi-url]: https://pypi.org/project/bocadillo-cli
 
-Bocadillo CLI provides standard development tooling for [Bocadillo] projects.
+Bocadillo CLI provides standard development tooling for [Bocadillo].
 
 [bocadillo]: https://github.com/bocadilloproject/bocadillo
 
@@ -20,7 +20,34 @@ pip install bocadillo-cli
 
 ## Usage
 
-> TODO
+### Overview
+
+```
+$ bocadillo --help
+Usage: bocadillo [OPTIONS] COMMAND [ARGS]...
+
+Options:
+  -V, --version  Show the version and exit.
+  --help         Show this message and exit.
+
+Commands:
+  create  Initialize a Bocadillo project.
+```
+
+### Create a project
+
+```
+$ bocadillo create --help
+Usage: bocadillo create [OPTIONS] NAME
+
+  Initialize a Bocadillo project.
+
+Options:
+  -d, --directory DIRECTORY  Directory where the project should be created.
+                             Created if does not exist. Defaults to `NAME`.
+  --dry                      Dry mode: does not write anything.
+  --help                     Show this message and exit.
+```
 
 ## Contributing
 
