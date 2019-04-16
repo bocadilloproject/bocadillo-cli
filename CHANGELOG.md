@@ -6,7 +6,14 @@ All notable changes to this project are documented here. The format of this docu
 
 ### Added
 
-- Project and package setup.
+Features:
+
+- Create a package: `bocadillo create`.
+- Show CLI and Bocadillo versions: `--version / -V`.
+
+Meta:
+
+- Setup project and package.
 - Changelog.
 - License.
 
