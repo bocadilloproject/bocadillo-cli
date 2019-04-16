@@ -1,6 +1,6 @@
 import setuptools
 
-description = "Development tools for Bocadillo"
+description = "Standard development tooling for Bocadillo"
 
 with open("README.md", "r") as readme:
     long_description = readme.read()
