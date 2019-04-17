@@ -4,6 +4,14 @@ All notable changes to this project are documented here. The format of this docu
 
 ## [Unreleased]
 
+### Added
+
+- The generated `app.py` module now explicitly sets up provider discovery.
+
+### Fixed
+
+- Previously, running `bocadillo create my-package` would result in creating a Python package named `my-package`, which is not a valid Python identifier. This has been fixed: the package would now be named `my_package`.
+
 ## [v0.1.1] - 2019-14-17
 
 ### Fixed

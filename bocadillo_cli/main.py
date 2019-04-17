@@ -49,13 +49,20 @@ class Writer:
 
 
 class Project:
-    def __init__(self, location: pathlib.Path, name: str, writer: Writer):
+    def __init__(
+        self, location: pathlib.Path, name: str, package: str, writer: Writer
+    ):
         self.location = location
         self.name = name
+        self.package = package
         self._writer = writer
 
     def _get_template_context(self) -> dict:
-        return {"name": self.name, "version": __version__}
+        return {
+            "name": self.name,
+            "package": self.package,
+            "version": __version__,
+        }
 
     def _apply_templates(self, names, root: pathlib.Path):
         context = self._get_template_context()
@@ -72,7 +79,7 @@ class Project:
         )
 
     def _create_package(self):
-        root = self.location / self.name
+        root = self.location / self.package
         self._writer.mkdir(root)
         self._apply_templates(
             [
@@ -125,8 +132,22 @@ def cli():
     pass
 
 
+def add_package_param(ctx: click.Context, param: str, value: str) -> str:
+    package = value.replace("-", "_")
+
+    if not package.isidentifier():
+        raise click.BadParameter(
+            f"{package} is not a valid Python identifier. "
+            "Please use another project name."
+        )
+
+    ctx.params["package"] = package
+
+    return value
+
+
 @cli.command()
-@click.argument("name")
+@click.argument("name", callback=add_package_param)
 @click.option(
     "-d",
     "--directory",
@@ -143,7 +164,7 @@ def cli():
     default=False,
     help="Dry mode: does not write anything.",
 )
-def create(name: str, directory: typing.Optional[str], dry: bool):
+def create(name: str, package: str, directory: typing.Optional[str], dry: bool):
     """Initialize a Bocadillo project."""
     if directory is None:
         directory = name
@@ -155,6 +176,9 @@ def create(name: str, directory: typing.Optional[str], dry: bool):
         )
 
     project = Project(
-        location=pathlib.Path(directory), name=name, writer=Writer(dry=dry)
+        location=pathlib.Path(directory),
+        name=name,
+        package=package,
+        writer=Writer(dry=dry),
     )
     project.create()

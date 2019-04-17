@@ -1,6 +1,7 @@
 """Application definition."""
-from bocadillo import App
+from bocadillo import App, discover_providers
 
 app = App()
+discover_providers("{{ package }}.providerconf")
 
 # Create routes here.
