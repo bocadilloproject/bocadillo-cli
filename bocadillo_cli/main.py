@@ -86,13 +86,15 @@ class Project:
         )
 
     def _after_success(self):
-        click.echo()
-        click.echo(f"Success! Created project at {self.location.absolute()}")
+        click.echo("\n---\n")
+        click.echo(
+            f"Success! ✨🌟✨ Created {self.name} at {self.location.absolute()}"
+        )
 
         click.echo()
         cd = fmt.code(f"cd {self.location}")
         readme = fmt.code("README.md")
-        click.echo(f"You can now run {cd} and read {readme} to get started.")
+        click.echo(f"Get started: {cd} and refer to instructions in {readme}.")
 
         click.echo()
         click.echo("To get help about Bocadillo, visit the docs:")
