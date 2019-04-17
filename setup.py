@@ -31,8 +31,8 @@ setuptools.setup(
     description=description,
     long_description=long_description,
     long_description_content_type="text/markdown",
-    packages=setuptools.find_packages(),
-    include_package_data=True,
+    packages=setuptools.find_packages(exclude=["bocadillo_cli.templates"]),
+    include_package_data=True,  # see MANIFEST.in
     entry_points={"console_scripts": ["bocadillo=bocadillo_cli.main:cli"]},
     install_requires=["click>=7.0, <8.0", "jinja2>=2.10.1"],
     python_requires=">=3.6",

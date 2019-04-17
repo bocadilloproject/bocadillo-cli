@@ -60,7 +60,8 @@ class Project:
     def _apply_templates(self, names, root: pathlib.Path):
         context = self._get_template_context()
         for name in names:
-            content = _get_template(name).render(context)
+            template_name = f"{name}.jinja"
+            content = _get_template(template_name).render(context)
             path = pathlib.Path(root, name)
             self._writer.writefile(path, content)
 
