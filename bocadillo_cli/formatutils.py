@@ -14,5 +14,5 @@ def muted(text: str) -> str:
 
 
 def version(text: str) -> str:
-    return click.style(f"v{text}", fg="magenta")
+    return click.style(text, fg="magenta")
 

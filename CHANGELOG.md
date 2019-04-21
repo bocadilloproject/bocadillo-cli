@@ -4,6 +4,11 @@ All notable changes to this project are documented here. The format of this docu
 
 ## [Unreleased]
 
+### Fixed
+
+- Allow to initialise a project in the current directory.
+- Do not overwrite files when generating a project.
+
 ## [v0.2.0] - 2019-04-18
 
 ### Added

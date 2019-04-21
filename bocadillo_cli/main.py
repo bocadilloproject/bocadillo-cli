@@ -34,27 +34,35 @@ class Writer:
         self.dry = dry
 
     def mkdir(self, path: pathlib.Path, **kwargs):
+        if not self.dry:
+            try:
+                path.mkdir(**kwargs)
+            except FileExistsError as exc:
+                if path == pathlib.Path.cwd():
+                    return
+                raise exc from None
         click.echo(f"{self.CREATE} {path}")
-        if self.dry:
-            return
-        path.mkdir(**kwargs)
 
-    def writefile(self, path: str, content: str):
+    def writefile(self, path: pathlib.Path, content: str):
+        if path.exists():
+            return
+
+        if not self.dry:
+            with open(str(path), "w") as f:
+                f.write(content)
+
         nbytes = len(content.encode())
         click.echo(f"{self.CREATE} {path} ({nbytes} bytes)")
-        if self.dry:
-            return
-        with open(str(path), "w") as f:
-            f.write(content)
 
 
 class Project:
     def __init__(
         self, location: pathlib.Path, name: str, package: str, writer: Writer
     ):
-        self.location = location
+        self.location = location.absolute()
         self.name = name
         self.package = package
+        self.package_root = (self.location / self.package).absolute()
         self._writer = writer
 
     def _get_template_context(self) -> dict:
@@ -72,15 +80,16 @@ class Project:
             path = pathlib.Path(root, name)
             self._writer.writefile(path, content)
 
-    def _create_meta(self):
+    def _create_dirs(self):
         self._writer.mkdir(self.location)
+        self._writer.mkdir(self.package_root)
+
+    def _create_meta(self):
         self._apply_templates(
             [".gitignore", "README.md", "requirements.txt"], root=self.location
         )
 
     def _create_package(self):
-        root = self.location / self.package
-        self._writer.mkdir(root)
         self._apply_templates(
             [
                 "__init__.py",
@@ -89,14 +98,12 @@ class Project:
                 "settings.py",
                 "providerconf.py",
             ],
-            root=root,
+            root=self.package_root,
         )
 
     def _after_success(self):
         click.echo("\n---\n")
-        click.echo(
-            f"Success! ✨🌟✨ Created {self.name} at {self.location.absolute()}"
-        )
+        click.echo(f"Success! ✨🌟✨ Created {self.name} at {self.location}")
 
         click.echo()
         cd = fmt.code(f"cd {self.location}")
@@ -115,6 +122,7 @@ class Project:
         click.echo("Happy coding! 🥪")
 
     def create(self):
+        self._create_dirs()
         self._create_meta()
         self._create_package()
         self._after_success()
