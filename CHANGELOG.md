@@ -4,6 +4,8 @@ All notable changes to this project are documented here. The format of this docu
 
 ## [Unreleased]
 
+## [v0.2.1] - 2019-04-21
+
 ### Fixed
 
 - Allow to initialise a project in the current directory.
@@ -40,7 +42,8 @@ Meta:
 - Changelog.
 - License.
 
-[unreleased]: https://github.com/bocadilloproject/bocadillo-cli/compare/v0.2.0...HEAD
+[unreleased]: https://github.com/bocadilloproject/bocadillo-cli/compare/v0.2.1...HEAD
+[v0.2.1]: https://github.com/bocadilloproject/bocadillo-cli/compare/v0.2.0...v0.2.1
 [v0.2.0]: https://github.com/bocadilloproject/bocadillo-cli/compare/v0.1.1...v0.2.0
 [v0.1.1]: https://github.com/bocadilloproject/bocadillo-cli/compare/v0.1.0...v0.1.1
 [v0.1.0]: https://github.com/bocadilloproject/bocadillo-cli/compare/04dff6e...v0.1.0
