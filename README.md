@@ -12,6 +12,8 @@ Bocadillo CLI provides standard development tooling for [Bocadillo].
 
 [bocadillo]: https://github.com/bocadilloproject/bocadillo
 
+![](media/demo.gif)
+
 ## Install
 
 ```bash
