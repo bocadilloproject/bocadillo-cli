@@ -50,6 +50,7 @@ class Writer:
         if not self.dry:
             with open(str(path), "w") as f:
                 f.write(content)
+                f.write("\n")
 
         nbytes = len(content.encode())
         click.echo(f"{self.CREATE} {path} ({nbytes} bytes)")
