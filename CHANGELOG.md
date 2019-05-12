@@ -4,6 +4,10 @@ All notable changes to this project are documented here. The format of this docu
 
 ## [Unreleased]
 
+### Fixed
+
+- An encoding issue prevented from running the `create` command on Windows. This has been fixed. (@EricE)
+
 ## [v0.2.1] - 2019-04-21
 
 ### Fixed
