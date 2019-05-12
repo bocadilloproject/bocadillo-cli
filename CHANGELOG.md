@@ -4,6 +4,8 @@ All notable changes to this project are documented here. The format of this docu
 
 ## [Unreleased]
 
+## [v0.2.2] - 2019-05-12
+
 ### Fixed
 
 - An encoding issue prevented from running the `create` command on Windows. This has been fixed. (@EricE)
@@ -46,7 +48,8 @@ Meta:
 - Changelog.
 - License.
 
-[unreleased]: https://github.com/bocadilloproject/bocadillo-cli/compare/v0.2.1...HEAD
+[unreleased]: https://github.com/bocadilloproject/bocadillo-cli/compare/v0.2.2...HEAD
+[v0.2.2]: https://github.com/bocadilloproject/bocadillo-cli/compare/v0.2.1...v0.2.2
 [v0.2.1]: https://github.com/bocadilloproject/bocadillo-cli/compare/v0.2.0...v0.2.1
 [v0.2.0]: https://github.com/bocadilloproject/bocadillo-cli/compare/v0.1.1...v0.2.0
 [v0.1.1]: https://github.com/bocadilloproject/bocadillo-cli/compare/v0.1.0...v0.1.1
