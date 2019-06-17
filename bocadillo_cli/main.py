@@ -48,10 +48,7 @@ def cli():
     ),
 )
 @click.option(
-    "--dry",
-    is_flag=True,
-    default=False,
-    help="Dry mode: does not write anything.",
+    "--dry", is_flag=True, default=False, help="Do not write anything to disk."
 )
 @click.option(
     "--no-input",

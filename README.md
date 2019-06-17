@@ -49,7 +49,7 @@ Usage: bocadillo create [OPTIONS] NAME
 Options:
   -d, --directory DIRECTORY  Directory where the project should be created.
                              Created if does not exist. Defaults to `NAME`.
-  --dry                      Dry mode: does not write anything.
+  --dry                      Do not write anything to disk.
   --no-input                 Send default answers to prompts.
   --help                     Show this message and exit.
 ```
