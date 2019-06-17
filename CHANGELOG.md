@@ -4,6 +4,12 @@ All notable changes to this project are documented here. The format of this docu
 
 ## [Unreleased]
 
+Support for Bocadillo 0.17.
+
+### Changed
+
+- Providers are now configured using the `PROVIDERS_MODULES` setting.
+
 ## [v0.2.2] - 2019-05-12
 
 ### Fixed
