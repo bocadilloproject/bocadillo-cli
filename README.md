@@ -44,10 +44,13 @@ Usage: bocadillo create [OPTIONS] NAME
 
   Initialize a Bocadillo project.
 
+  Hint: use `-d .` to generate files in the current directory.
+
 Options:
   -d, --directory DIRECTORY  Directory where the project should be created.
                              Created if does not exist. Defaults to `NAME`.
   --dry                      Dry mode: does not write anything.
+  --no-input                 Send default answers to prompts.
   --help                     Show this message and exit.
 ```
 

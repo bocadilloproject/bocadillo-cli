@@ -25,15 +25,19 @@ def create_project(
         }
     )
 
-    click.echo("\n---\n")
-    click.echo(fmt.success("Success! 🌟"))
-    click.echo(f"Created project {name} at {fmt.code(location)}")
+    click.echo()
+    click.echo(
+        fmt.pre_success(f"Created project {name} at {fmt.code(location)}")
+    )
 
     click.echo()
     readme = fmt.code(location / "README.md")
-    click.echo(f"- Read {readme} to get started.")
+    click.echo(fmt.pre_hint(f"Read {readme} to get started."))
     click.echo(
-        f"- To learn more about Bocadillo, visit the docs: {fmt.link(cst.DOCS)}"
+        fmt.pre_hint(
+            "To learn more about Bocadillo, "
+            f"visit the docs: {fmt.link(cst.DOCS)}"
+        )
     )
 
     click.echo()

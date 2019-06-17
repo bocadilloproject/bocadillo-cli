@@ -6,9 +6,15 @@ All notable changes to this project are documented here. The format of this docu
 
 Support for Bocadillo 0.17.
 
+### Added
+
+- Ask for confirmation if files to be generated already exist.
+- Send default answers to prompts using the `--no-input` flag.
+
 ### Changed
 
 - Providers are now configured using the `PROVIDERS_MODULES` setting.
+- Improved styling of CLI messages.
 
 ## [v0.2.2] - 2019-05-12
 

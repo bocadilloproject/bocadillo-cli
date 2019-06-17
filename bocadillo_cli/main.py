@@ -53,8 +53,23 @@ def cli():
     default=False,
     help="Dry mode: does not write anything.",
 )
-def create(name: str, package: str, directory: typing.Optional[str], dry: bool):
-    """Initialize a Bocadillo project."""
+@click.option(
+    "--no-input",
+    is_flag=True,
+    default=False,
+    help="Send default answers to prompts.",
+)
+def create(
+    name: str,
+    package: str,
+    directory: typing.Optional[str],
+    dry: bool,
+    no_input: bool,
+):
+    """Initialize a Bocadillo project.
+    
+    Hint: use `-d .` to generate files in the current directory.
+    """
     if directory is None:
         directory = name
 
@@ -70,6 +85,7 @@ def create(name: str, package: str, directory: typing.Optional[str], dry: bool):
         package=package,
         writer=Writer(
             dry=dry,
+            no_input=no_input,
             templates=Templates(
                 context={
                     "name": name,

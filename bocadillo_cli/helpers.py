@@ -27,34 +27,44 @@ class Templates:
 
 class Writer:
     CREATE = fmt.success("CREATE")
+    SKIP = fmt.muted("SKIP")
 
-    def __init__(self, dry: bool, templates: Templates):
+    def __init__(self, dry: bool, no_input: bool, templates: Templates):
         self.dry = dry
+        self.no_input = no_input
         self.templates = templates
         self.root = None
 
     def mkdir(self, path: pathlib.Path, **kwargs):
-        if not self.dry:
-            try:
+        if path.exists():
+            action = self.SKIP
+        else:
+            action = self.CREATE
+            if not self.dry:
                 path.mkdir(**kwargs)
-            except FileExistsError as exc:
-                if path == pathlib.Path.cwd():
-                    return
-                raise exc from None
-        click.echo(f"{self.CREATE} {path} {fmt.muted('directory')}")
+        click.echo(f"{action} {path} {fmt.muted('directory')}")
 
     def writefile(self, path: pathlib.Path, content: str):
-        if path.exists():
-            return
+        if path.exists() and (
+            self.no_input
+            or not click.confirm(
+                fmt.pre_warn(
+                    f"File {fmt.code(path)} already exists. Overwrite?"
+                )
+            )
+        ):
+            nbytes = None
+            action = self.SKIP
+        else:
+            if not self.dry:
+                with open(str(path), "w", encoding="utf-8") as f:
+                    f.write(content)
+                    f.write("\n")
+            nbytes = len(content.encode())
+            action = self.CREATE
 
-        if not self.dry:
-            with open(str(path), "w", encoding="utf-8") as f:
-                f.write(content)
-                f.write("\n")
-
-        nbytes = len(content.encode())
-        nbytes_formatted = fmt.muted(f"({nbytes} bytes)")
-        click.echo(f"{self.CREATE} {path} {nbytes_formatted}")
+        nbytes_formatted = fmt.muted(f" ({nbytes} bytes)") if nbytes else ""
+        click.echo(f"{action} {path}{nbytes_formatted}")
 
     def writetemplate(self, *names: str, root: pathlib.Path = None) -> None:
         if root is None:
