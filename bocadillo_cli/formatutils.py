@@ -1,17 +1,17 @@
+import typing
+
 import click
 
 
-def code(text: str) -> str:
-    return click.style(text, fg="magenta")
+def _make_formatter(color: str) -> typing.Callable[[typing.Any], str]:
+    def _format(obj: typing.Any):
+        return click.style(str(obj), fg=color)
+
+    return _format
 
 
-def link(text: str) -> str:
-    return click.style(text, fg="blue")
-
-
-def muted(text: str) -> str:
-    return click.style(text, fg="black")
-
-
-def version(text: str) -> str:
-    return click.style(text, fg="magenta")
+success = _make_formatter("green")
+code = _make_formatter("magenta")
+link = _make_formatter("blue")
+muted = _make_formatter("black")
+version = code

@@ -15,8 +15,7 @@ except ImportError:
 else:
     BOCADILLO_VERSION = fmt.version(bocadillo.__version__)
 
-LIB_REPO = "https://github.com/bocadilloproject/bocadillo"
-DOCS = "https://bocadilloproject.github.io/"
+DOCS = "https://bocadilloproject.github.io"
 
 
 def _get_template(name: str) -> Template:
@@ -28,7 +27,7 @@ def _get_template(name: str) -> Template:
 
 
 class Writer:
-    CREATE = click.style("CREATE", fg="green")
+    CREATE = fmt.success("CREATE")
 
     def __init__(self, dry: bool):
         self.dry = dry
@@ -41,7 +40,7 @@ class Writer:
                 if path == pathlib.Path.cwd():
                     return
                 raise exc from None
-        click.echo(f"{self.CREATE} {path}")
+        click.echo(f"{self.CREATE} {path} {fmt.muted('directory')}")
 
     def writefile(self, path: pathlib.Path, content: str):
         if path.exists():
@@ -53,17 +52,18 @@ class Writer:
                 f.write("\n")
 
         nbytes = len(content.encode())
-        click.echo(f"{self.CREATE} {path} ({nbytes} bytes)")
+        nbytes_formatted = fmt.muted(f"({nbytes} bytes)")
+        click.echo(f"{self.CREATE} {path} {nbytes_formatted}")
 
 
 class Project:
     def __init__(
         self, location: pathlib.Path, name: str, package: str, writer: Writer
     ):
-        self.location = location.absolute()
+        self.location = location
         self.name = name
         self.package = package
-        self.package_root = (self.location / self.package).absolute()
+        self.package_root = self.location / self.package
         self._writer = writer
 
     def _get_template_context(self) -> dict:
@@ -104,23 +104,18 @@ class Project:
 
     def _after_success(self):
         click.echo("\n---\n")
-        click.echo(f"Success! ✨🌟✨ Created {self.name} at {self.location}")
+        click.echo(fmt.success("Success! 🌟"))
+        click.echo(f"Created project {self.name} at {fmt.code(self.location)}.")
 
         click.echo()
-        cd = fmt.code(f"cd {self.location}")
-        readme = fmt.code("README.md")
-        click.echo(f"Get started: {cd} and refer to instructions in {readme}.")
+        readme = fmt.code(self.location / "README.md")
+        click.echo(f"- Read {readme} to get started.")
+        click.echo(
+            f"- To learn more about Bocadillo, visit the docs: {fmt.link(DOCS)}"
+        )
 
         click.echo()
-        click.echo("To get help about Bocadillo, visit the docs:")
-        click.echo(fmt.link(DOCS))
-
-        click.echo()
-        click.echo("If you like it, give it a star!")
-        click.echo(fmt.link(LIB_REPO))
-
-        click.echo()
-        click.echo("Happy coding! 🥪")
+        click.echo("Happy coding!")
 
     def create(self):
         self._create_dirs()
