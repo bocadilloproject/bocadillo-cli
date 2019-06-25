@@ -13,7 +13,7 @@ Support for Bocadillo 0.17.
 
 ### Changed
 
-- Providers are now configured using the `PROVIDERS_MODULES` setting.
+- Providers are now configured using the `PROVIDER_MODULES` setting.
 - Improved styling of CLI messages.
 
 ## [v0.2.2] - 2019-05-12
