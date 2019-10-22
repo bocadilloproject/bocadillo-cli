@@ -1,4 +1,4 @@
-# Bocadillo CLI
+# Bocadillo CLI (UNMAINTAINED)
 
 [![pypi](https://img.shields.io/pypi/v/bocadillo-cli.svg)][pypi-url]
 [![travis](https://img.shields.io/travis/bocadilloproject/bocadillo-cli.svg)](https://travis-ci.org/bocadilloproject/bocadillo)
